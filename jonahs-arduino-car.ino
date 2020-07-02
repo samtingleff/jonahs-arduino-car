@@ -39,15 +39,40 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
  
-  rawMotor ( 250, 250, 250, 250 );
+  rawMotor ( 255, 255, 255, 255 );
   long ultrasonicDistance = distanceToObject();
   if (ultrasonicDistance < 20) {
+    
+    setServoAngle(180);
+    delay(1000);
+    long cmright = distanceToObject();
+    setServoAngle(0);
+    delay(1000);
+    long cmleft = distanceToObject();
+
+    if (cmright > cmleft) {
+      rawMotor ( 250, -250, 250, -250 );
+      delay(1000);
+      rawMotor ( 250, 250, 250, 250 );
+    } else {
+      rawMotor (-250, 250, -250, 250 );
+      delay(1000);
+      rawMotor (250, 250, 250, 250 );
+    }
+
     rawMotor ( 0, 0, 0, 0 );
     delay(1000);
     rawMotor( -250, -250 ,-250 ,-250);
     delay(2000);
-    rawMotor (0, 0, 0, 0 );
+    rawMotor ( 0,0,0,0 );
     delay(1000);
+    
+    rawMotor ( -250, 250, -250, 250 );
+    delay(1000);
+    rawMotor (0,0,0,0 );
+    delay(500);
+    
+    rawMotor ( 250, 250, 250, 250 );
   }
 }
 
